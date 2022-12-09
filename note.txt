@@ -1,0 +1,43 @@
+2:51:15 
+
+to create a database:
+1. create database url
+what is database url? idk bro just follow
+
+2.create database engine that fetch the databaseurl parameters and 1 more paramater for thread check
+what thread check do? idk bro
+
+3. make declarative base Base = declarative_base()
+what for? idk 
+
+4. make a SessionLocal variable that is sessionmaker method with parameter of binding the engine and some other parameters
+what dat do? idk
+
+to use database (store to database)
+1. make a database getter dat simply has the database variable whichi is SessionLocal
+and opens the database and closes it with try: and finally
+e.g.
+def get_db():
+    db = sessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+2. create post method on main that has the request schemas and sb sessions idk man 
+and like new_blog = models.Blog?? wha doe sthis do?
+db.add(new_blog) ohh it adds the newblog to db which is the sessionLocal
+db.commit() #oh commiting, pushing it to blog.db?
+db.refresh(new_blog) #fetching the just commited db?
+return new_blog #returns it to the api? yeah that must be it
+
+getting/fetching database
+1. create get method that has a function that uses the db: Session = Depends(get_db)
+2. on the body function, pass in a variable that equals to 
+db.query(<sql table> e.g. models.Blog).all()
+
+getting/fetching certain id 
+1. create get decorator optionally u can add the path decorator parameters if u want to nembak the id langsung
+2. in the function u need 2 params which is the (id, db: Session = Depends(get_db)) id param to pass in the specified id to the function body, also so u can use in docs
+3. in the function body uses a new variable eg "get_item_by_id" that equals to 
+db.query(models.Blog).filter(models.Blog.id == id).first() # models.Blog.id == id is the where function and first() is so that the search return the first found linearly? 
